@@ -36,9 +36,9 @@ ao.send({Target = OWNERSHIP_RENOUNCE_MANAGER_ID, Action = "IsRenounced", Process
 
 Upon receiving a `"MakeRenounce"` message, _Ownerhip Renounce Manager_ sends an `Eval` to install a new handler on _Renouncer_, which revokes ownership when triggered.
 
-The installed handler is also marked with a nonce that is partly random, partly specific to the current time. Therefore the nonce **cannot be known beforehand** by _Renouncer_.
+The installed handler is also marked with a **nonce** that is partly random, partly specific to the current time. Therefore the nonce **cannot be known beforehand** by _Renouncer_.
 
-Additionally to ownership renouncement, the installed handler would **send a message with the nonce back** to the _Ownerhip Renounce Manager_, thereby proving that it has executed the handler installed specifically for this purpose.
+Additionally to ownership renouncement, the installed handler **sends a message with the nonce back** to the _Ownerhip Renounce Manager_, thereby proving that it has executed the handler installed specifically for this purpose.
 
 Upon receiving the confirmation of the Handler being added, the _Ownership Renounce Manager_ proceeds to triggering that handler, thereby effectively renouncing its own ownership over _Renouncer_.
 
