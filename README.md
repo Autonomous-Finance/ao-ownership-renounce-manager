@@ -1,6 +1,9 @@
 # AO Ownership Renounce Manager
 
 An AO process to be used by any Owner of an AO process in order to renounce ownership over their owned process.
+
+The official instance of this process (the AO singleton) is currently
+`XDY51mdAWjuEYEWaBNVR6p4mNGLHMDVvo5vPJOqEszg`
  
 ## Premise
 
