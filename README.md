@@ -5,13 +5,13 @@ An AO process to be used as a tool for **easily verifiable, trustable ownership 
 Any Owner of an AO process can use the _Ownership Renounce Manager_ in order to renounce ownership over their owned process by following the suggested pattern.
 
 The official instance of this process (the AO singleton) is currently
-`XDY51mdAWjuEYEWaBNVR6p4mNGLHMDVvo5vPJOqEszg`
+`fXBKcbeyYbN0rNFt0r3BP2JVgR-_sxA2LGbRppitFqg`
  
 ## Assumptions
 
 The _Ownership Renounce Manager_ is designed as a trusted singleton process on AO.
 
-Its logic is simple and needs to be immutable. By inspecting the first 3 Eval messages in the [message history](https://www.ao.link/#/entity/XDY51mdAWjuEYEWaBNVR6p4mNGLHMDVvo5vPJOqEszg?tab=source-code) of the _Ownership Renounce Manager_, you can be certain of itsfelf being with ownerhip-renounced and therefore immutable.
+Its logic is simple and needs to be immutable. By inspecting the first 3 Eval messages in the [message history](https://www.ao.link/#/entity/fXBKcbeyYbN0rNFt0r3BP2JVgR-_sxA2LGbRppitFqg?tab=source-code) of the _Ownership Renounce Manager_, you can be certain of itsfelf being with ownerhip-renounced and therefore immutable.
 
 Look for an Eval message with "Owner = ''" in order to verify.
 
@@ -30,6 +30,16 @@ After performing these steps and after the subsequent message handling has concl
 
 ```lua
 ao.send({Target = OWNERSHIP_RENOUNCE_MANAGER_ID, Action = "IsRenounced", ProcessID = RENOUNCER_ID})
+```
+
+Alternatively, the renouncement can be inferred by querying the gateway for an event-message sent by the _Ownership Renounce Manager_ to itself.
+
+```lua
+ao.send({
+  Target = ao.id, -- _Ownership Renounce Manager_
+  Event = "RenounceOwnership",
+  ProcessID = msg.From -- process that has renounced ownership via the _Ownership Renounce Manager_
+})
 ```
 
 ## How It Works

@@ -1,5 +1,6 @@
 IsRenounced = IsRenounced or {} -- map process id to boolean
 
+Version = '1.11.3'
 
 --[[  _OwnershipRenounceManager_ should, by convention, be a simple trusted singleton process on AO.
 
@@ -109,6 +110,11 @@ Handlers.add(
   function(msg)
     if msg.Tags.Nonce == Nonces[msg.From] then
       IsRenounced[msg.From] = true
+      ao.send({
+        Target = ao.id,
+        Event = "RenounceOwnership",
+        ProcessID = msg.From
+      })
     end
   end
 )
