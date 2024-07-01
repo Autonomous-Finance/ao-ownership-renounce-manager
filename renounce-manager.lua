@@ -1,6 +1,6 @@
 IsRenounced = IsRenounced or {} -- map process id to boolean
 
-Version = '1.11.3'
+Version = '1.11.4'
 
 --[[  _OwnershipRenounceManager_ should, by convention, be a simple trusted singleton process on AO.
 
@@ -15,7 +15,7 @@ Version = '1.11.3'
 
   Any process owner that wants to perform a verifiable ownership renouncement on their process
   would first set that process' `Owner` to _OwnerhipRenounceManager_ (this),
-  then send a message ("Action" = "MakeRenounce") to it.
+  then send a message ('Action' = 'MakeRenounce') to it.
 
   For the purpose of this scenario, we call the other process _Renouncer_.
 
@@ -35,8 +35,8 @@ Version = '1.11.3'
 -- Trustable way to publicly verify that a particular process has had its ownership renounced
 -- via this _RenounceManager_
 Handlers.add(
-  "isRenounced",
-  Handlers.utils.hasMatchingTag("Action", "IsRenounced"),
+  'isRenounced',
+  Handlers.utils.hasMatchingTag('Action', 'IsRenounced'),
   function(msg)
     return IsRenounced[msg.Tags.ProcessID] == true
   end
@@ -47,20 +47,20 @@ Nonces = Nonces or {} -- map process id to nonce
 local createEvalText = function(nonce)
   return [[
     Handlers.add(
-      "renounceOwnership",
-      Handlers.utils.hasMatchingTag("Action", "RenounceOwnership"),
+      'renounceOwnership',
+      Handlers.utils.hasMatchingTag('Action', 'RenounceOwnership'),
       function(msg)
-        Owner = ""
+        Owner = ''
         ao.send({
           Target = ']] .. ao.id .. [[',
-          Action = "Renounced",
+          Action = 'Renounced',
           Nonce = ']] .. nonce .. [['
         })
         Handlers.prepend(
-          "ensureRenounced",
-          function() return "continue" end,
+          'ensureRenounced',
+          function() return 'continue' end,
           function()
-            assert(Owner == "", "This contract is supposed to have its ownership renounced")
+            assert(Owner == '', 'This contract is supposed to have its ownership renounced')
           end
         )
       end
@@ -68,7 +68,7 @@ local createEvalText = function(nonce)
 
     ao.send({
       Target = ']] .. ao.id .. [[',
-      Action = 'Ack",
+      Action = 'Ack',
       Nonce = ']] .. nonce .. [['
     })
 
@@ -78,7 +78,7 @@ end
 -- Sent by any _Renouncer_
 Handlers.add(
   'makeRenounce',
-  Handlers.utils.hasMatchingTag("Action", "MakeRenounce"),
+  Handlers.utils.hasMatchingTag('Action', 'MakeRenounce'),
   function(msg)
     local targetProcess = msg.From
     -- this process is the owner of the target process right now
@@ -95,7 +95,7 @@ Handlers.add(
 -- _Renouncer_ acknowledges that it has installed the renouncement Handler
 Handlers.add(
   'ack',
-  Handlers.utils.hasMatchingTag("Action", "Ack"),
+  Handlers.utils.hasMatchingTag('Action', 'Ack'),
   function(msg)
     if msg.Tags.Nonce == Nonces[msg.From] then
       ao.send({ Target = msg.From, Action = 'RenounceOwnership' })
@@ -106,13 +106,13 @@ Handlers.add(
 -- Persist Renouncement
 Handlers.add(
   'renounced',
-  Handlers.utils.hasMatchingTag("Action", "Renounced"),
+  Handlers.utils.hasMatchingTag('Action', 'Renounced'),
   function(msg)
     if msg.Tags.Nonce == Nonces[msg.From] then
       IsRenounced[msg.From] = true
       ao.send({
         Target = ao.id,
-        Event = "RenounceOwnership",
+        Event = 'RenounceOwnership',
         ProcessID = msg.From
       })
     end

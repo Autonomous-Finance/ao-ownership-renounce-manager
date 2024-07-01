@@ -5,13 +5,13 @@ An AO process to be used as a tool for **easily verifiable, trustable ownership 
 Any Owner of an AO process can use the _Ownership Renounce Manager_ in order to renounce ownership over their owned process by following the suggested pattern.
 
 The official instance of this process (the AO singleton) is currently
-`fXBKcbeyYbN0rNFt0r3BP2JVgR-_sxA2LGbRppitFqg`
+`Yv5sYuFL7fTsugM5nBkeENLg0qq9RjWGAUaZLI_g-OM`
  
 ## Assumptions
 
 The _Ownership Renounce Manager_ is designed as a trusted singleton process on AO.
 
-Its logic is simple and needs to be immutable. By inspecting the first 3 Eval messages in the [message history](https://www.ao.link/#/entity/fXBKcbeyYbN0rNFt0r3BP2JVgR-_sxA2LGbRppitFqg?tab=source-code) of the _Ownership Renounce Manager_, you can be certain of itsfelf being with ownerhip-renounced and therefore immutable.
+Its logic is simple and needs to be immutable. By inspecting the first 3 Eval messages in the [message history](https://www.ao.link/#/entity/Yv5sYuFL7fTsugM5nBkeENLg0qq9RjWGAUaZLI_g-OM?tab=source-code) of the _Ownership Renounce Manager_, you can be certain of itsfelf being with ownerhip-renounced and therefore immutable.
 
 Look for an Eval message with "Owner = ''" in order to verify.
 
