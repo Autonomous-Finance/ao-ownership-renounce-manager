@@ -1,6 +1,6 @@
 IsRenounced = IsRenounced or {} -- map process id to boolean
 
-Version = '1.11.4'
+Version = '0.1'
 
 --[[  _OwnershipRenounceManager_ should, by convention, be a simple trusted singleton process on AO.
 
@@ -38,7 +38,10 @@ Handlers.add(
   'isRenounced',
   Handlers.utils.hasMatchingTag('Action', 'IsRenounced'),
   function(msg)
-    return IsRenounced[msg.Tags.ProcessID] == true
+    ao.send({
+      Target = msg.From,
+      IsRenounced = IsRenounced[msg.Tags.ProcessID]
+    })
   end
 )
 
