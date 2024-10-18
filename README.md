@@ -62,6 +62,12 @@ If you own a process and you want to renounce ownership using the _Ownership Ren
 
 1. set that process' `Owner` to _Ownerhip Renounce Manager_
 2. immediately send a message with `{"Action" = "MakeRenounce"}` to the _Ownership Renounce Manager_
+   
+
+```lua
+Owner = OWNERSHIP_RENOUNCE_MANAGER_PROCESS_ID
+ao.send({Target = OWNERSHIP_RENOUNCE_MANAGER_PROCESS_ID, Action = "MakeRenounce"})
+```
 
 For the purpose of this scenario, we call your process the _Renouncer_.
 
