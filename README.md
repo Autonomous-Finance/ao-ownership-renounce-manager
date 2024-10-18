@@ -5,7 +5,7 @@ An AO process to be used as a tool for **easily verifiable, trustable ownership 
 Any Owner of an AO process can use the _Ownership Renounce Manager_ in order to renounce ownership over their owned process by following the suggested pattern.
 
 The official instance of this process (the AO singleton) is currently
-`8kSVzbM6H25JeX3NuHp15qI_MAGq4vSka4Aer5ocYxE`
+`wA4k2u-NqBfBsjbQWq9cWnv2Cn98hB-osDXx9AfPaMA`
  
 ## Background - AO Process Ownership
 
